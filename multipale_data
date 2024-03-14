@@ -1,0 +1,50 @@
+package com.railword;
+import java.util.ArrayList;
+
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import org.hibernate.cfg.Configuration;
+
+public class App 
+{
+    public static void main( String[] args )
+    {
+ Configuration cfg=new Configuration(); 
+ cfg.configure("hibernate.cfg.xml");
+   SessionFactory factory=cfg.buildSessionFactory();
+   
+   
+ Session session = factory.openSession(); 
+//   Transaction t = session.beginTransaction();  
+//   std.setId(101);
+//   std.setName("railworld");
+//   std.setRollno(1);
+   
+   
+ 	 ArrayList<StudentBean> user = new ArrayList<>();
+ 
+//	 
+// 	t.commit();
+      user.add(new StudentBean(5, "deepak",101));
+      
+      user.add(new StudentBean(2, "ashish",102));
+      user.add(new StudentBean(3, "sakshi",103));
+      user.add(new StudentBean(4, "sneha",104));
+      user.add(new StudentBean(5, "Ankit",105));
+      
+ 	for(StudentBean i:user) {
+ 		session.save(i);
+ 		  
+ 	}
+ 	
+   System.out.println(user);
+   session.close();
+   factory.close();
+
+   System.out.println("saved the data");
+   
+   
+    }
+}
